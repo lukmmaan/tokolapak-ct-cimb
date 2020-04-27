@@ -10,6 +10,7 @@
     line-height: 22px;
     text-align: center;
     letter-spacing: 0.1px;
+    padding: 10px 20px;
 }
 .btn-hitam{
     color: white;
@@ -24,6 +25,7 @@
     line-height: 22px;
     text-align: center;
     letter-spacing: 0.1px;
+    padding: 10px 20px;
 }
 .btn-hitam:hover{
     color: white
