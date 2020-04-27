@@ -6,14 +6,14 @@ type ButtonTypes = {
   children: any;
   style?: CSSProperties;
   className?: string;
-  onClick: any;
+  onClick?: any;
 };
 
 const ButtonUI = (props: ButtonTypes) => {
   let { type, children, style, className, onClick } = props;
 
-  type = type || "contained";
-
+  type = type ;
+  // || "contained"
   return (
     <div
       style={style}

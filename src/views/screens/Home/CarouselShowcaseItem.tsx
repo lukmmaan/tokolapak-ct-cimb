@@ -41,12 +41,14 @@ const CarouselShowcaseItem = ({
               <ButtonUI
                 type="outlined"
                 className="mt-5"
+                
                 style={{
                   backgroundColor: "#CCEAD7",
                   borderColor: "#CCEAD7",
                   borderRadius: "16px",
                   fontWeight: "bolder",
                 }}
+                onClick={""}
               >
                 BUY NOW
               </ButtonUI>

@@ -22,8 +22,10 @@ class AuthScreen extends React.Component {
                             (this.state.kondisi) ? (
                                 <div>
                                     <div className="d-flex">
-                                        <input onClick={this.registerFungsi} className="btn btn-putih" type="button" value="Register"/>
-                                        <input className="btn btn-hitam" type="button" value="Login"/>
+                                        <ButtonUI className="btn-putih" onClick={this.registerFungsi}>Register</ButtonUI>
+                                        <ButtonUI className="btn-hitam">Login</ButtonUI>
+                                        {/* <input onClick={this.registerFungsi} className="btn btn-putih" type="button" value="Register"/> */}
+                                        {/* <input className="btn btn-hitam" type="button" value="Login"/> */}
                                     </div>    
                                     <h3 style={{ marginTop: "20px" }}>Log In</h3>
                                     <p className="mt-4">
@@ -40,8 +42,10 @@ class AuthScreen extends React.Component {
                             ) : (
                                 <div>
                                     <div className="d-flex">
-                                        <input className="btn btn-hitam" type="button" value="Register"/>
-                                        <input onClick={this.loginFungsi} className="btn btn-putih" type="button" value="Login"/>
+                                        {/* <input className="btn btn-hitam" type="button" value="Register"/>
+                                        <input onClick={this.loginFungsi} className="btn btn-putih" type="button" value="Login"/> */}
+                                        <ButtonUI className="btn-hitam">Register</ButtonUI>
+                                        <ButtonUI className="btn-putih" onClick={this.loginFungsi}>Login</ButtonUI>
                                     </div>  
                                     <h3 style={{ marginTop: "20px" }}>Register</h3>
                                     <p className="mt-4">
