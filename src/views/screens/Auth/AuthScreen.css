@@ -1,0 +1,30 @@
+.btn-putih{
+    color: black;
+    border: rgb(216, 216, 216) 1px solid;
+    border-radius: 3px;
+    margin-right: 10px;
+    font-family: Muli;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: 0.1px;
+}
+.btn-hitam{
+    color: white;
+    background-color: rgb(36, 36, 36);
+    border: rgb(216, 216, 216) 1px solid;
+    border-radius: 3px;
+    margin-right: 10px;
+    font-family: Muli;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: 0.1px;
+}
+.btn-hitam:hover{
+    color: white
+}
