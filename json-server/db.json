@@ -6,16 +6,6 @@
       "id": 1
     },
     {
-<<<<<<< HEAD
-      "username": "lukman",
-      "fullName": "lukman yudokusumo",
-      "email": "lukmanlukman@yahoo.com",
-      "password": "123123123",
-      "id": 2
-    }
-  ],
-  "products":[
-=======
       "username": "doraemon",
       "fullName": "Dora Emon",
       "password": "password",
@@ -31,7 +21,6 @@
     }
   ],
   "products": [
->>>>>>> f86fce85423ff90d22cec77cbdd6f8e9a566db3e
     {
       "productName": "iPhone 7 Plus",
       "price": 5000000,

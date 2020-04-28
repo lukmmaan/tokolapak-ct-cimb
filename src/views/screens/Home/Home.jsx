@@ -121,11 +121,11 @@ class Home extends React.Component {
       });
   };
 
-  // renderProducts = () => {
-  //   return this.state.bestSellerData.map((val) => {
-  //     return <ProductCard data={val} className="m-2" />;
-  //   });
-  // };
+  renderProducts = () => {
+    return this.state.bestSellerData.map((val) => {
+      return <ProductCard data={val} className="m-2" />;
+    });
+  };
 
   componentDidMount() {
     this.getBestSellerData();
@@ -170,7 +170,7 @@ class Home extends React.Component {
           {/* BEST SELLER SECTION */}
           <h2 className="text-center font-weight-bolder mt-5">BEST SELLER</h2>
           <div className="row d-flex flex-wrap justify-content-center">
-            {/* {this.renderProducts()} */}
+            {this.renderProducts()}
           </div>
         </div>
         {/* ABOUT SECTION */}
