@@ -39,7 +39,9 @@ const mapStateToProps = (state) => {
     user: state.user,
   };
 };
+
 const mapDispatchToProps = {
   keepLogin: userKeepLogin,
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));

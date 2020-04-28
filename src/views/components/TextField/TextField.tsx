@@ -7,7 +7,7 @@ type TextFieldProps = {
   placeholder?: string;
   onChange?: any;
   value?: any;
-  type?:string
+  type?: string;
 };
 
 class TextField extends React.Component<TextFieldProps> {

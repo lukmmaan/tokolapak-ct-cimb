@@ -82,7 +82,7 @@ export const registerHandler = (userData) => {
         if (res.data.length > 0) {
           dispatch({
             type: "ON_REGISTER_FAIL",
-            payload: "username sudah digunakan",
+            payload: "Username sudah digunakan",
           });
           alert('Username telah digunakan')
         } else {
