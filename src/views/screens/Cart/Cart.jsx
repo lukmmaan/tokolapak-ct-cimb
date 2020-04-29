@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import "./Cart.css";
-
 import Axios from "axios";
 import { API_URL } from "../../../constants/API";
 import ButtonUI from "../../components/Button/Button";
@@ -11,6 +10,21 @@ class Cart extends React.Component {
     dataCart: []
   }
   componentDidMount() {
+    // Axios.get(`${API_URL}/products/1`, {
+    //   params: {
+    //     _embed: "carts",
+    //   },
+    // })
+    //   .then((res) => {
+    //     console.log(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    this.addCart()
+  }
+  
+   addCart =()=>{
     Axios.get(`${API_URL}/carts`, {
       params: {
         userId: this.props.user.id,
@@ -24,19 +38,7 @@ class Cart extends React.Component {
       .catch((err) => {
         console.log(err);
       });
-
-    // Axios.get(`${API_URL}/products/1`, {
-    //   params: {
-    //     _embed: "carts",
-    //   },
-    // })
-    //   .then((res) => {
-    //     console.log(res.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-  }
+   } 
    renderCart = () => {
     return this.state.dataCart.map((val, idx) => {
       return (
@@ -59,22 +61,18 @@ class Cart extends React.Component {
       )
     })
   }
-  componentDidUpdate(){
-    {this.renderCart()}
-  }
   deleteCart = (idx) => {
     // alert(idx)
     Axios.delete(`${API_URL}/carts/${idx}`)
     .then((res) => {
         console.log(res.data)
         alert("sudah terhapus")
- 
+        this.addCart()
     })
     .catch((err) => {
         console.log(err)
     })
   }
-
   render() {
     return (
       <div className="container">

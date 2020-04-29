@@ -62,13 +62,14 @@ class AuthScreen extends React.Component {
   };
 
   loginBtnHandler = () => {
+    console.log(this.props.user.cookieChecked)
     const { username, password } = this.state.loginForm;
     let newUser = {
       username,
       password,
     };
-
     this.props.onLogin(newUser);
+
   };
 
   checkboxHandler = (e, form) => {
@@ -142,7 +143,7 @@ class AuthScreen extends React.Component {
           <h3>Log In</h3>
           <p className="mt-4">
             Welcome back.
-            <br /> Please, login to your account
+            <br /> Please, login to your account,
           </p>
           <TextField
             value={this.state.loginForm.username}

@@ -24,7 +24,7 @@ class App extends React.Component {
       } else {
         this.props.cookieChecker();
       }
-    }, 2000);
+    }, 500);
   }
 
   render() {
