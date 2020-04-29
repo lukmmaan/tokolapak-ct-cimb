@@ -21,10 +21,9 @@ class App extends React.Component {
       let cookieResult = cookieObj.get("authData");
       if (cookieResult) {
         this.props.keepLogin(cookieResult);
-      } else {
-        this.props.cookieChecker();
       }
-    }, 2000);
+      this.props.cookieChecker();
+    }, 1000);
   }
 
   render() {
@@ -37,10 +36,10 @@ class App extends React.Component {
             <Route exact path="/auth" component={AuthScreen} />
             <Route
               exact
-              path="/product/:productId"
+              path="/products/:productId"
               component={ProductDetails}
             />
-            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/carts" component={Cart} />
           </Switch>
           <div style={{ height: "120px" }} />
         </>
@@ -50,7 +49,6 @@ class App extends React.Component {
     }
   }
 }
-
 const mapStateToProps = (state) => {
   return {
     user: state.user,

@@ -4,11 +4,12 @@ import "./Cart.css";
 
 import Axios from "axios";
 import { API_URL } from "../../../constants/API";
+import ButtonUI from "../../components/Button/Button";
 
 class Cart extends React.Component {
-    state={
-        dataCart:{}
-    }
+  state = {
+    dataCart: []
+  }
   componentDidMount() {
     Axios.get(`${API_URL}/carts`, {
       params: {
@@ -17,8 +18,8 @@ class Cart extends React.Component {
       },
     })
       .then((res) => {
-          this.setState({dataCart:res.data[0]})
-          console.log(this.state.dataCart.product);
+        this.setState({ dataCart: res.data })
+        console.log(this.state.dataCart);
       })
       .catch((err) => {
         console.log(err);
@@ -36,25 +37,62 @@ class Cart extends React.Component {
     //     console.log(err);
     //   });
   }
-  renderCart =()=>{
-
+   renderCart = () => {
+    return this.state.dataCart.map((val, idx) => {
+      return (
+        <tr key={`dataCart-${val.product.id}`}>
+          <th>{idx + 1}</th>
+          <th>{val.product.productName}</th>
+          <th>{val.product.price}</th>
+          <th>{val.product.category}</th>
+          <th>{val.product.desc}</th>
+          <th><img src={val.product.image} width="80" /></th>
+          <th>
+            <ButtonUI
+            onClick={()=>this.deleteCart(val.id)}
+            style={{ backgroundColor: "red" }}
+            >
+            Delete
+            </ButtonUI>
+          </th>
+        </tr>
+      )
+    })
   }
+  componentDidUpdate(){
+    {this.renderCart()}
+  }
+  deleteCart = (idx) => {
+    // alert(idx)
+    Axios.delete(`${API_URL}/carts/${idx}`)
+    .then((res) => {
+        console.log(res.data)
+        alert("sudah terhapus")
+ 
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+  }
+
   render() {
     return (
       <div className="container">
         <table className="table table-hover">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Product Name</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Desc</th>
-                </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th>Desc</th>
+              <th>Image</th>
+              <th>Button</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.renderCart()}
+          </tbody>
         </table>
       </div>
     );
