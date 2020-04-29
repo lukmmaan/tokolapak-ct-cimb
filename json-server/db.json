@@ -82,12 +82,6 @@
       "userId": 4,
       "productId": 1,
       "quantity": 1,
-      "id": 5
-    },
-    {
-      "userId": 4,
-      "productId": 1,
-      "quantity": 1,
       "id": 6
     },
     {
@@ -107,6 +101,18 @@
       "productId": 1,
       "quantity": 1,
       "id": 10
+    },
+    {
+      "userId": 4,
+      "productId": 1,
+      "quantity": 1,
+      "id": 11
+    },
+    {
+      "userId": 4,
+      "productId": 2,
+      "quantity": 1,
+      "id": 13
     }
   ]
 }
