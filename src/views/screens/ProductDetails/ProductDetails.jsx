@@ -19,25 +19,45 @@ class ProductDetails extends React.Component {
       id: 0,
     },
   };
-
   addToCartHandler = () => {
-    // POST method ke /cart
-    // Isinya: userId, productId, quantity
     // console.log(this.props.user.id);
-    // console.log(this.state.productData.id);
-    Axios.post(`${API_URL}/carts`, {
-      userId: this.props.user.id,
-      productId: this.state.productData.id,
-      quantity: 1,
+    Axios.get(`${API_URL}/carts`, {
+      params: {
+        userId: this.props.user.id,
+        productId: this.state.productData.id
+      }
     })
       .then((res) => {
-        console.log(res);
-        swal("Add to carts", "Your item has been added to your cart", "success");
+        if (res.data.length == 0) {
+          Axios.post(`${API_URL}/carts`, {
+            userId: this.props.user.id,
+            productId: this.state.productData.id,
+            quantity: 1,
+          })
+            .then((res) => {
+              console.log(res);
+              swal("", "Your item has been add to your cart", "success")
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+        } else {
+          Axios.patch(`${API_URL}/carts/${res.data[0].id}`, {
+            quantity: res.data[0].quantity + 1,
+          })
+            .then((res) => {
+              // console.log("barang sudah ada, dibeli lagi")
+              swal("", `you buy for ${res.data.quantity} items`, "success")
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+        }
       })
       .catch((err) => {
         console.log(err);
-      });
-  };
+      })
+  }
 
   componentDidMount() {
     Axios.get(`${API_URL}/products/${this.props.match.params.productId}`)

@@ -4,10 +4,11 @@ import "./Cart.css";
 import Axios from "axios";
 import { API_URL } from "../../../constants/API";
 import ButtonUI from "../../components/Button/Button";
-
+import {Table,Alert} from "reactstrap"
+import { Link } from "react-router-dom";
 class Cart extends React.Component {
   state = {
-    dataCart: []
+    cartData: []
   }
   componentDidMount() {
     // Axios.get(`${API_URL}/products/1`, {
@@ -22,6 +23,7 @@ class Cart extends React.Component {
     //     console.log(err);
     //   });
     this.addCart()
+
   }
   
    addCart =()=>{
@@ -32,38 +34,39 @@ class Cart extends React.Component {
       },
     })
       .then((res) => {
-        this.setState({ dataCart: res.data })
-        console.log(this.state.dataCart);
+        this.setState({ cartData: res.data })
+        console.log(this.state.cartData);
       })
       .catch((err) => {
         console.log(err);
       });
    } 
    renderCart = () => {
-    return this.state.dataCart.map((val, idx) => {
+    return this.state.cartData.map((val, idx) => {
+      const {quantity,product,id} = val
+      const {productName,price,image} = product
       return (
-        <tr key={`dataCart-${val.product.id}`}>
-          <th>{idx + 1}</th>
-          <th>{val.product.productName}</th>
-          <th>{val.product.price}</th>
-          <th>{val.product.category}</th>
-          <th>{val.product.desc}</th>
-          <th><img src={val.product.image} width="80" /></th>
-          <th>
+        <tr key={`cartData-${id}`}>
+          <td>{idx + 1}</td>
+          <td>{productName}</td>
+          <td>{price}</td>
+          <td>{quantity}</td>
+          <td><img src={image} width="80" /></td>
+          <td>
             <ButtonUI
-            onClick={()=>this.deleteCart(val.id)}
+            onClick={()=>this.deleteCart(id)}
             style={{ backgroundColor: "red" }}
             >
             Delete
             </ButtonUI>
-          </th>
+          </td>
         </tr>
       )
     })
   }
-  deleteCart = (idx) => {
-    // alert(idx)
-    Axios.delete(`${API_URL}/carts/${idx}`)
+  deleteCart = (id) => {
+    // alert(id)
+    Axios.delete(`${API_URL}/carts/${id}`)
     .then((res) => {
         console.log(res.data)
         alert("sudah terhapus")
@@ -75,23 +78,30 @@ class Cart extends React.Component {
   }
   render() {
     return (
-      <div className="container">
-        <table className="table table-hover">
+      <div className="container py-4">
+        {
+          this.state.cartData.length>0 ?(
+        <Table>
           <thead>
             <tr>
               <th>No.</th>
               <th>Product Name</th>
               <th>Price</th>
-              <th>Category</th>
-              <th>Desc</th>
+              <th>Qantity</th>
               <th>Image</th>
-              <th>Button</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {this.renderCart()}
           </tbody>
-        </table>
+        </Table>
+          ):(
+            <Alert>
+              Your Cart is Empty! <Link to="/">Go Shopping</Link>
+            </Alert>
+          )
+        }
       </div>
     );
   }

@@ -86,7 +86,7 @@ export const registerHandler = (userData) => {
           });
           alert('Username telah digunakan')
         } else {
-          Axios.post(`${API_URL}/users`, userData)
+          Axios.post(`${API_URL}/users`, {...userData,role:"user"})
             .then((res) => {
               console.log(res.data);
               dispatch({
@@ -111,3 +111,10 @@ export const cookieChecker = () => {
     type: "COOKIE_CHECK",
   };
 };
+
+export const onchangeTodo =(text)=>{
+  return {
+      type: "ON_CHANGE",
+      payload: text,
+  };
+}

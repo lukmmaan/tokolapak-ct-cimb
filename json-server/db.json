@@ -1,35 +1,41 @@
 {
   "users": [
     {
-      "username": "seto",
-      "password": "password",
-      "id": 1
-    },
-    {
       "username": "doraemon",
       "fullName": "Dora Emon",
       "password": "password",
       "email": "doraemon@mail.com",
-      "id": 2
+      "id": 2,
+      "role": "user"
     },
     {
       "username": "pikachu",
       "fullName": "Dora Emon",
       "password": "password",
       "email": "doraemon@mail.com",
-      "id": 3
+      "id": 3,
+      "role": "user"
+    },
+    {
+      "username": "admin",
+      "fullName": "super admin",
+      "password": "password",
+      "email": "admin@mail.com",
+      "id": 4,
+      "role": "admin"
     },
     {
       "username": "lukman",
       "fullName": "lukman yudokusumo",
       "password": "123123123",
-      "email": "lyudokusumo@gmail.com",
-      "id": 4
+      "email": "ly@gmail.com",
+      "role": "user",
+      "id": 5
     }
   ],
   "products": [
     {
-      "productName": "iPhone 7 Plus",
+      "productName": "iPhone 7+",
       "price": 5000000,
       "category": "Phone",
       "image": "https://ibox.co.id/media/wysiwyg/PromoOnline/web-banner---iphone-7-plus-rev.png",
@@ -39,7 +45,7 @@
     {
       "productName": "iPad Pro 3",
       "price": 15000000,
-      "category": "Tablet",
+      "category": "Tab",
       "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/i/p/ipad-pro-11-select-cell-spacegray-201810.png",
       "desc": "HP Terbaikk loh",
       "id": 2
@@ -51,6 +57,70 @@
       "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/m/b/mbp15touch-silver-select-cto-201807_3_1.jpeg",
       "desc": "HP Terbaikk loh",
       "id": 3
+    },
+    {
+      "productName": "Iphone 11 Pro Max",
+      "price": "23000000",
+      "category": "Phone",
+      "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/i/p/iphone-11-pro-max-midnight-green_3.png",
+      "desc": "Desktop keren",
+      "id": 4
+    },
+    {
+      "productName": "Apple Watch Series 5",
+      "price": "7000000",
+      "category": "Phone",
+      "image": "https://ibox.co.id/media/wysiwyg/Watch/aw5/apple-watch-5_06.png",
+      "desc": "jam gaul",
+      "id": 5
+    },
+    {
+      "productName": "AirPods Pro",
+      "price": "5000000",
+      "category": "Tab",
+      "image": "https://ibox.co.id/media/wysiwyg/AirPods/AirpodsPro/airpodspro-1-min.png",
+      "desc": "Earphone ga jelas",
+      "id": 6
+    },
+    {
+      "productName": "AirPods Pro Machine",
+      "price": "5200000",
+      "category": "Tab",
+      "image": "https://ibox.co.id/media/wysiwyg/AirPods/AirpodsPro/airpodspro-5-min.png",
+      "desc": "Earphone cepet hilang",
+      "id": 7
+    },
+    {
+      "productName": "Charger iPods Next-Gen",
+      "price": "100000",
+      "category": "Phone",
+      "image": "https://ibox.co.id/media/wysiwyg/AirPods/AirpodsPro/airpodspro-7-min.png",
+      "desc": "charger",
+      "id": 9
+    },
+    {
+      "productName": "Mini DisplayPort to VGA Adapter",
+      "price": "549000",
+      "category": "Phone",
+      "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/m/b/mb572.jpeg",
+      "desc": "Tulis Tinjauan Anda tentang produk ini  Every Mac with a Mini DisplayPort allows you to connect an external display or projector using an adapter. You can use an external display as your main workspace or to extend your desktop, or you can work in mirrored mode with a projector so you can view what your audience sees.",
+      "id": 10
+    },
+    {
+      "productName": "New iPad Gen-7",
+      "price": "10000000",
+      "category": "Tab",
+      "image": "https://ibox.co.id/media/wysiwyg/iPad/iPad7/ipad7_06-min.png",
+      "desc": "iPad paling mahal",
+      "id": 11
+    },
+    {
+      "productName": "iMac Pro 2020",
+      "price": "50000000",
+      "category": "Desktop",
+      "image": "https://ibox.co.id/media/wysiwyg/iMacPro/imac-pro_02-min.png",
+      "desc": "Para profesional menyukai iMac. Jadi Apple menciptakan iMac yang khusus untuk Anda. Kini iMac dilengkapi grafis dan prosesor paling andal yang pernah ada di Mac, serta penyimpanan, memori, dan I/O paling canggih — semua hadir di balik layar Retina 5K menakjubkan dengan desain ramping yang serbaguna. Apa pun profesi Anda, mulai dari fotografer, editor video, animator 3D, musisi, pengembang perangkat lunak, sampai ilmuwan, iMac Pro siap untuk mengubah ide terbesar Anda jadi karya terhebat.",
+      "id": 12
     }
   ],
   "carts": [
@@ -67,16 +137,38 @@
       "id": 2
     },
     {
-      "userId": 1,
       "productId": 1,
       "quantity": 1,
       "id": 3
     },
     {
-      "userId": 1,
       "productId": 1,
       "quantity": 1,
       "id": 4
+    },
+    {
+      "userId": 5,
+      "productId": 2,
+      "quantity": 3,
+      "id": 5
+    },
+    {
+      "userId": 5,
+      "productId": 1,
+      "quantity": 5,
+      "id": 6
+    },
+    {
+      "userId": 5,
+      "productId": 4,
+      "quantity": 3,
+      "id": 7
+    },
+    {
+      "userId": 5,
+      "productId": 5,
+      "quantity": 6,
+      "id": 8
     }
   ]
 }

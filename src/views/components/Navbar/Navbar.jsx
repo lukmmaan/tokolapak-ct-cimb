@@ -4,11 +4,16 @@ import { connect } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons/";
-
+import {onchangeTodo} from "../../../redux/actions/"
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import "./Navbar.css";
 import ButtonUI from "../Button/Button.tsx";
-
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownToggle,
+  DropdownMenu,
+} from "reactstrap";
 const CircleBg = ({ children }) => {
   return <div className="circle-bg">{children}</div>;
 };
@@ -17,14 +22,21 @@ class Navbar extends React.Component {
   state = {
     searchBarIsFocused: false,
     searcBarInput: "",
+    dropdownOpen: false,
   };
-
   onFocus = () => {
     this.setState({ searchBarIsFocused: true });
   };
 
   onBlur = () => {
     this.setState({ searchBarIsFocused: false });
+  };
+  logoutBtnHandler = () => {
+    this.props.onLogout();
+    // this.forceUpdate();
+  };
+  toggleDropdown = () => {
+    this.setState({ dropdownOpen: !this.state.dropdownOpen });
   };
 
   render() {
@@ -35,7 +47,7 @@ class Navbar extends React.Component {
             LOGO
           </Link>
         </div>
-        <div style={{ flex: 1 }} className="px-5">
+        <div style={{ flex: 1 }} className="px-5 d-flex flex-row justify-content-start">
           <input
             onFocus={this.onFocus}
             onBlur={this.onBlur}
@@ -44,24 +56,57 @@ class Navbar extends React.Component {
               }`}
             type="text"
             placeholder="Cari produk impianmu disini"
+            onChange={(e)=>this.props.onchangeTodo(e.target.value)}
           />
         </div>
         <div className="d-flex flex-row align-items-center">
           {this.props.user.id ? (
-            <>
-              <FontAwesomeIcon icon={faUser} style={{ fontSize: 24 }} />
-              <p className="small ml-3 mr-4">{this.props.user.username}</p>
-              <FontAwesomeIcon
-                className="mr-2"
-                icon={faShoppingCart}
-                style={{ fontSize: 24 }}
-              />
-              <CircleBg>
-                <small style={{ color: "#3C64B1", fontWeight: "bold" }}>
-                  4
-                </small>
-              </CircleBg>
-            </>
+                        <>
+                        <Dropdown
+                          toggle={this.toggleDropdown}
+                          isOpen={this.state.dropdownOpen}
+                        >
+                          <DropdownToggle tag="div" className="d-flex">
+                            <FontAwesomeIcon icon={faUser} style={{ fontSize: 24 }} />
+                            <p className="small ml-3 mr-4">{this.props.user.username}</p>
+                          </DropdownToggle>
+                          <DropdownMenu className="mt-2">
+                            <DropdownItem>
+                              <Link
+                                style={{ color: "inherit", textDecoration: "none" }}
+                                to="/admin/dashboard"
+                              >
+                                Dashboard
+                              </Link>
+                            </DropdownItem>
+                            <DropdownItem>Members</DropdownItem>
+                            <DropdownItem>Payments</DropdownItem>
+                          </DropdownMenu>
+                        </Dropdown>
+                        <Link
+                          className="d-flex flex-row"
+                          to="/cart"
+                          style={{ textDecoration: "none", color: "inherit" }}
+                        >
+                          <FontAwesomeIcon
+                            className="mr-2"
+                            icon={faShoppingCart}
+                            style={{ fontSize: 24 }}
+                          />
+                          <CircleBg>
+                            <small style={{ color: "#3C64B1", fontWeight: "bold" }}>
+                              4
+                            </small>
+                          </CircleBg>
+                        </Link>
+                        <ButtonUI
+                          onClick={this.logoutBtnHandler}
+                          className="ml-3"
+                          type="textual"
+                        >
+                          Logout
+                        </ButtonUI>
+                      </>
           ) : (
             <>
               <ButtonUI className="mr-3" type="textual">
@@ -92,5 +137,8 @@ const mapStateToProps = (state) => {
     user: state.user,
   };
 };
+const mapDispatchtoProps={
+  onchangeTodo,
+}
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps,mapDispatchtoProps)(Navbar);
