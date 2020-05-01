@@ -112,7 +112,6 @@ class Home extends React.Component {
         : this.state.activeIndex - 1;
     this.setState({ activeIndex: prevIndex });
   };
-  
   getBestSellerData = (val) => {
     // alert(val)
     if (!val) {
@@ -141,6 +140,8 @@ class Home extends React.Component {
 
   renderProducts = () => {
     return this.state.bestSellerData.map((val) => {
+      const {productName}= val
+      if (productName.toLowerCase().startsWith(this.props.user.search.toLowerCase()))
       return (
         <ProductCard key={`bestseller-${val.id}`} data={val} className="m-2" />
       );
@@ -148,12 +149,20 @@ class Home extends React.Component {
   };
 
   componentDidMount() {
-    this.getBestSellerData();
+      this.getBestSellerData();
   }
   render() {
     return (
       <div>
         <div className="d-flex justify-content-center flex-row align-items-center my-3">
+        <Link to="/" style={{ color: "inherit" }}>
+            <h6
+              className="mx-4 font-weight-bold"
+              onClick={() => this.getBestSellerData("")}
+            >
+              ALL
+            </h6>
+          </Link>
           <Link to="/" style={{ color: "inherit" }}>
             <h6
               className="mx-4 font-weight-bold"
@@ -209,7 +218,6 @@ class Home extends React.Component {
           {/* BEST SELLER SECTION */}
           <h2 className="text-center font-weight-bolder mt-5">BEST SELLER,{this.props.user.search}</h2>
           <div className="row d-flex flex-wrap justify-content-center">
-            {}
             {this.renderProducts()}
           </div>
         </div>

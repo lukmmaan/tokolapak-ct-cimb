@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-
+import { logoutHandler } from "../../../redux/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons/";
 import {onchangeTodo} from "../../../redux/actions/"
@@ -139,6 +139,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchtoProps={
   onchangeTodo,
+  onLogout: logoutHandler,
 }
 
 export default connect(mapStateToProps,mapDispatchtoProps)(Navbar);

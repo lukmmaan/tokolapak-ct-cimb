@@ -34,7 +34,7 @@ export default (state = init_state, action) => {
     case "COOKIE_CHECK":
       return { ...state, cookieChecked: true };
     case "ON_CHANGE":
-      return {...state, cookieChecked:true, search: action.payload}
+      return { ...state, cookieChecked: true, search: action.payload }
     default:
       return { ...state };
   }
