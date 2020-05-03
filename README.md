@@ -1,3 +1,10 @@
+Final project :
+
+Toko peralatan mendaki gunung/ explore destinasi alam
+    1. user     : Pengguna user dapat login,register dan juga membeli barang yang diinginkan ataupun hanya memasukan ke cart belanja mereka
+    2. admin    : Pengguna admindapat menambahkan atau menghapus  dan mengubah stok barang yang sudah ada atau menambahkan barang baru
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
