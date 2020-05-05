@@ -171,9 +171,9 @@
     {
       "userId": 5,
       "totalPrice": 40020000,
-      "status": "pending",
+      "status": "Completed",
       "tanggalBelanja": "5-May-2020 15:59:28",
-      "tanggalSelesai": "",
+      "tanggalSelesai": "5-May-2020 20:58:27",
       "username": "lukman",
       "id": 4
     },
@@ -212,6 +212,33 @@
       "tanggalSelesai": "5-May-2020 20:45:11",
       "username": "lukman",
       "id": 8
+    },
+    {
+      "userId": 5,
+      "totalPrice": 15620000,
+      "status": "pending",
+      "tanggalBelanja": "5-May-2020 20:59:40",
+      "tanggalSelesai": "",
+      "username": "lukman",
+      "id": 9
+    },
+    {
+      "userId": 2,
+      "totalPrice": 74100000,
+      "status": "Completed",
+      "tanggalBelanja": "5-May-2020 21:10:57",
+      "tanggalSelesai": "5-May-2020 21:11:21",
+      "username": "doraemon",
+      "id": 10
+    },
+    {
+      "userId": 2,
+      "totalPrice": 30020000,
+      "status": "Completed",
+      "tanggalBelanja": "5-May-2020 21:14:1",
+      "tanggalSelesai": "5-May-2020 21:15:7",
+      "username": "doraemon",
+      "id": 11
     }
   ],
   "transactions_details": [
@@ -326,6 +353,46 @@
       "totalPrice": 100000000,
       "quantity": 2,
       "id": 14
+    },
+    {
+      "productId": 7,
+      "transactionId": 9,
+      "price": 5200000,
+      "totalPrice": 15600000,
+      "quantity": 3,
+      "id": 15
+    },
+    {
+      "productId": 3,
+      "transactionId": 10,
+      "price": 20000000,
+      "totalPrice": 20000000,
+      "quantity": 1,
+      "id": 16
+    },
+    {
+      "productId": 5,
+      "transactionId": 10,
+      "price": 7000000,
+      "totalPrice": 14000000,
+      "quantity": 2,
+      "id": 17
+    },
+    {
+      "productId": 13,
+      "transactionId": 10,
+      "price": 20000000,
+      "totalPrice": 40000000,
+      "quantity": 2,
+      "id": 18
+    },
+    {
+      "productId": 2,
+      "transactionId": 11,
+      "price": 15000000,
+      "totalPrice": 30000000,
+      "quantity": 2,
+      "id": 19
     }
   ],
   "wishlist": []

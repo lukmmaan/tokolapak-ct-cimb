@@ -26,7 +26,7 @@ class Payment extends React.Component {
                 console.log(err);
             })
     }
-    konfirmasiPayment = (id,idx) => {
+    konfirmasiPayment = (id, idx) => {
         const monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
         ];
@@ -43,84 +43,103 @@ class Payment extends React.Component {
             })
                 .then((res) => {
                     this.addpaymentData()
-                    swal("Yes..!","Oke lo confirm pembayaran ini","success")
+                    swal("Yes..!", "Oke lo confirm pembayaran ini", "success")
                 })
         }
-        else{
+        else {
             // console.log("status completed")
-            swal("No..!","Lo udah pernah Confirm sebelumnya, ga bisa confirm lagi","error")
+            swal("No..!", "Lo udah pernah Confirm sebelumnya, ga bisa confirm lagi", "error")
         }
         // console.log(this.state.paymentData[idx].status)
     }
-    deletePayment = (id) => {
-        Axios.delete(`${API_URL}/transactions/${id}`)
-            .then((res) => {
-                swal("Berhasil", "Telah dihapus", "success")
-                this.addpaymentData()
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+    renderPayment2 = () => {
+        return this.state.paymentData.map((val, idx) => {
+            const { id, username, status, tanggalBelanja, tanggalSelesai, totalPrice, userId, transactions_details } = val
+            if (val.status == "Completed") {
+                return (
+                    <tr key={`Members-${id}`}>
+                        <td style={{ color: "green" }}>{status}</td>
+                        <td>{tanggalBelanja}</td>
+                        <td>{tanggalSelesai}</td>
+                        <td>{totalPrice}</td>
+                        <td>{username}</td>
+                        <td>
+                            <Table>
+                                <thead>
+                                    <tr class="table-primary">
+                                        <th>No.</th>
+                                        <th>ProductId</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {transactions_details.map(((value, idx) => {
+                                        return (
+                                            <tr>
+                                                <td>{idx + 1}</td>
+                                                <td>{value.productId}</td>
+                                                <td>{value.price}</td>
+                                                <td>{value.quantity}</td>
+                                                <td>{value.totalPrice}</td>
+                                            </tr>
+                                        )
+                                    }))}
+                                </tbody>
+                            </Table>
+                        </td>
+                        <td className="d-flex flex-row">
+                            <h3>Accepted Payment</h3>
+                        </td>
+                    </tr>
+                )
+            }
+        })
     }
     renderPayment = () => {
         return this.state.paymentData.map((val, idx) => {
-            const { id,username,status, tanggalBelanja, tanggalSelesai, totalPrice, userId, transactions_details } = val
-            return (
-                <tr key={`Members-${id}`}>
-                    <td>{idx + 1}.</td>
-                    {
-                        (status=="pending")?(
-                            <td style={{color:"red"}}>{status}</td>
-                        ):(
-                            <td style={{color:"green"}}>{status}</td>
-                        )
-                    }
-                    <td>{tanggalBelanja}</td>
-                    <td>{tanggalSelesai}</td>
-                    <td>{totalPrice}</td>
-                    <td>{username}</td>
-                    <td>
-                        <Table>
-                            <thead>
-                                <tr class="table-primary">
-                                    <th>No.</th>
-                                    <th>ProductId</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {transactions_details.map(((value,idx) => {
-                                    return (
-                                        <tr>
-                                            <td>{idx+1}</td>
-                                            <td>{value.productId}</td>
-                                            <td>{value.price}</td>
-                                            <td>{value.quantity}</td>
-                                            <td>{value.totalPrice}</td>
-                                        </tr>
-                                    )
-                                }))}
-                            </tbody>
-                        </Table>
-                    </td>
-                    <td className="d-flex flex-row">
-                        {
-                            (status=="pending")?(
-                                <>
-                            <ButtonUI onClick={() => this.konfirmasiPayment(id,idx)} className="mr-1">Konfirmasi</ButtonUI>
-                            <ButtonUI onClick={() => this.deletePayment(id)} type="outlined">Delete</ButtonUI>
-                                </>
-                            ):(
-                                <>
-                                <h3>Accepted Payment</h3>
-                                </>
-                            )
-                        }
-                    </td>
-                </tr>
-            )
+            const { id, username, status, tanggalBelanja, tanggalSelesai, totalPrice, userId, transactions_details } = val
+            if (val.status == "pending") {
+                return (
+                    <tr key={`Members-${id}`}>
+                        <td style={{ color: "red" }}>{status}</td>
+                        <td>{tanggalBelanja}</td>
+                        <td>{tanggalSelesai}</td>
+                        <td>{totalPrice}</td>
+                        <td>{username}</td>
+                        <td>
+                            <Table>
+                                <thead>
+                                    <tr class="table-primary">
+                                        <th>No.</th>
+                                        <th>ProductId</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {transactions_details.map(((value, idx) => {
+                                        return (
+                                            <tr>
+                                                <td>{idx + 1}</td>
+                                                <td>{value.productId}</td>
+                                                <td>{value.price}</td>
+                                                <td>{value.quantity}</td>
+                                                <td>{value.totalPrice}</td>
+                                            </tr>
+                                        )
+                                    }))}
+                                </tbody>
+                            </Table>
+                        </td>
+                        <td className="d-flex flex-row">
+                            <ButtonUI onClick={() => this.konfirmasiPayment(id, idx)} className="mr-1">Konfirmasi</ButtonUI>
+                        </td>
+                    </tr>
+                )
+            }
         })
     }
     componentDidMount() {
@@ -129,10 +148,10 @@ class Payment extends React.Component {
     render() {
         return (
             <div className="text-center">
+                <h3>Pending Stat's</h3>
                 <Table className="py-4 text-center">
                     <thead>
                         <tr>
-                            <th>No.</th>
                             <th>Status</th>
                             <th>Tanggal Belanja</th>
                             <th>Tanggal Selesai</th>
@@ -144,6 +163,23 @@ class Payment extends React.Component {
                     </thead>
                     <tbody>
                         {this.renderPayment()}
+                    </tbody>
+                </Table>
+                <h3>Completed Stat's</h3>
+                <Table style={{marginTop:"100"}} className="py-4 text-center">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Tanggal Belanja</th>
+                            <th>Tanggal Selesai</th>
+                            <th>Total Harga</th>
+                            <th>Username</th>
+                            <th>Transactions Detail</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.renderPayment2()}
                     </tbody>
                 </Table>
             </div>
