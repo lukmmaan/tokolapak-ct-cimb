@@ -153,9 +153,9 @@
     {
       "userId": 5,
       "totalPrice": 45000000,
-      "status": "pending",
+      "status": "Completed",
       "tanggalBelanja": "5-May-2020 15:10:0",
-      "tanggalSelesai": "",
+      "tanggalSelesai": "5-May-2020 17:59:0",
       "username": "lukman",
       "id": 2
     },
@@ -185,6 +185,33 @@
       "tanggalSelesai": "5-May-2020 16:17:37",
       "username": "doraemon",
       "id": 5
+    },
+    {
+      "userId": 5,
+      "totalPrice": 35100000,
+      "status": "Completed",
+      "tanggalBelanja": "5-May-2020 20:13:30",
+      "tanggalSelesai": "5-May-2020 20:13:54",
+      "username": "lukman",
+      "id": 6
+    },
+    {
+      "userId": 5,
+      "totalPrice": 23020000,
+      "status": "Completed",
+      "tanggalBelanja": "5-May-2020 20:14:41",
+      "tanggalSelesai": "5-May-2020 20:14:55",
+      "username": "lukman",
+      "id": 7
+    },
+    {
+      "userId": 5,
+      "totalPrice": 100300000,
+      "status": "Completed",
+      "tanggalBelanja": "5-May-2020 20:44:38",
+      "tanggalSelesai": "5-May-2020 20:45:11",
+      "username": "lukman",
+      "id": 8
     }
   ],
   "transactions_details": [
@@ -259,6 +286,46 @@
       "totalPrice": 50000000,
       "quantity": 1,
       "id": 9
+    },
+    {
+      "productId": 2,
+      "transactionId": 6,
+      "price": 15000000,
+      "totalPrice": 15000000,
+      "quantity": 1,
+      "id": 10
+    },
+    {
+      "productId": 3,
+      "transactionId": 6,
+      "price": 20000000,
+      "totalPrice": 20000000,
+      "quantity": 1,
+      "id": 11
+    },
+    {
+      "productId": 4,
+      "transactionId": 7,
+      "price": 23000000,
+      "totalPrice": 23000000,
+      "quantity": 1,
+      "id": 12
+    },
+    {
+      "productId": 9,
+      "transactionId": 8,
+      "price": 100000,
+      "totalPrice": 200000,
+      "quantity": 2,
+      "id": 13
+    },
+    {
+      "productId": 12,
+      "transactionId": 8,
+      "price": 50000000,
+      "totalPrice": 100000000,
+      "quantity": 2,
+      "id": 14
     }
   ],
   "wishlist": []

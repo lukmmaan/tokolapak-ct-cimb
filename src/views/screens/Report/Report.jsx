@@ -9,8 +9,9 @@ class Report extends React.Component {
         totalBelanjaApproved: [],
         productBought: 0,
         usernameData: [],
-        namaProduk:[],
-        produkSemoga:[]
+        namaProduk: [],
+        produkSemoga: [],
+        namaBarang: []
     }
     addReport = () => {
         Axios.get(`${API_URL}/users`)
@@ -58,43 +59,32 @@ class Report extends React.Component {
             })
         Axios.get(`${API_URL}/products`)
             .then((res) => {
-                // console.log(res.data)
-                res.data.map((val)=>{
-                    this.setState({
-                        namaProduk:[...this.state.namaProduk,val.productName]
-                    })
+                this.setState({
+                    namaBarang: res.data
                 })
-                // console.log(this.state.namaProduk)
+                // console.log(this.state.namaBarang)
             })
             .catch((err) => {
                 console.log(err)
             })
-            Axios.get(`${API_URL}/transactions`, {
-                params: {
-                    _embed: "transactions_details",
-                    status:"Completed"
-                }
+        Axios.get(`${API_URL}/transactions`,{
+            params:{
+                status:"Completed",
+                _embed:"transactions_details"
+            }
+        })
+        .then((res)=>{
+            this.setState({
+                produkSemoga: res.data
             })
-                .then((res) => {
-                    console.log(res.data);
-                    let arr=[]
-                    // let quantity
-                    res.data.map((val)=>{
-                        val.transactions_details.map((value)=>{
-                            arr=[...arr,{productId:value.productId,quantity:value.quantity}]
-                        })
-                    })
-                    // this.setState({
-                    //     produkSemoga:arr
-                    // })
-                    console.log(arr)
-                    let arrBaru = []
-                    
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
+            // console.log(this.state.produkSemoga)
+
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
     }
+
     componentDidMount() {
         this.addReport()
     }
@@ -111,17 +101,34 @@ class Report extends React.Component {
             )
         })
     }
-    renderProduct = ()=>{
-        return this.state.namaProduk.map((val,idx)=>{
-            return (
-                <>
-                    <tr>
-                        <td>{idx + 1}.</td>
-                        <td>{val}</td>
-                        <td>jumlah</td>
-                    </tr>
-                </>
-            )
+    renderSudahBeli =()=>{
+        return this.state.namaBarang.map((val,idx)=>{
+            const {productName,id} = val
+            let qtyTotal = 0
+            this.state.produkSemoga.map((valak)=>{
+                valak.transactions_details.map((anak_valak)=>{
+                    if (id===anak_valak.productId) {
+                        qtyTotal+= anak_valak.quantity
+                    }
+                    else{
+                        qtyTotal=qtyTotal
+                    }
+                })
+            })
+            if (qtyTotal>0) {     
+                return(
+                    <>
+                        <tr>
+                            <td>{idx+1}</td>
+                            <td>{productName}</td>
+                            <td>{qtyTotal}</td>
+                        </tr>
+                    </>
+                )
+            }
+            else{
+                return (<></>)
+            }
         })
     }
     render() {
@@ -152,7 +159,7 @@ class Report extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.renderProduct()}
+                        {this.renderSudahBeli()}
                     </tbody>
                 </Table>
             </div>
