@@ -65,7 +65,7 @@ class AdminDashboard extends React.Component {
                 // </tr>
                 <>
                 <tr
-                
+                  
                   onClick={() => {
                     if (this.state.activeProducts.includes(idx)) {
                       this.setState({
@@ -158,6 +158,7 @@ class AdminDashboard extends React.Component {
       };
       editProductHandler = () => {
         Axios.put(
+          //edit -> mengganti semua isi objek di JSON, perbedaan dengan patch adalah hanya mengganti apa yang dikirim
           `${API_URL}/products/${this.state.editForm.id}`,
           this.state.editForm
         )

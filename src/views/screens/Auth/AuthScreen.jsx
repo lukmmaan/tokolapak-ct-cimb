@@ -6,9 +6,11 @@ import Cookies from "universal-cookie";
 import TextField from "../../components/TextField/TextField";
 import ButtonUI from "../../components/Button/Button";
 import "./AuthScreen.css";
-
+import { totalCart } from "../../../redux/actions/search"
 // actions
 import { registerHandler, loginHandler } from "../../../redux/actions";
+import Axios from "axios";
+import { API_URL } from "../../../constants/API";
 
 class AuthScreen extends React.Component {
   state = {
@@ -30,7 +32,7 @@ class AuthScreen extends React.Component {
   componentDidUpdate() {
     if (this.props.user.id) {
       const cookie = new Cookies();
-      cookie.set("authData", JSON.stringify(this.props.user));
+      cookie.set("authData", JSON.stringify(this.props.user), { path: "/" });
     }
   }
 
@@ -68,6 +70,27 @@ class AuthScreen extends React.Component {
       password,
     };
     this.props.onLogin(newUser);
+    Axios.get(`${API_URL}/users`,{
+      params:{
+        username,
+        password
+      }
+    })
+    .then((res)=>{
+      // console.log(res.data[0].id)
+      Axios.get(`${API_URL}/carts`, {
+        params: {
+          userId: this.props.user.id,
+          _expand: "product",
+        },
+      })
+     .then((res)=>{
+      this.props.totalCart(res.data.length)
+     })
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
 
   };
 
@@ -182,7 +205,7 @@ class AuthScreen extends React.Component {
               <ButtonUI
                 className={`auth-screen-btn ${
                   this.state.activePage == "register" ? "active" : null
-                }`}
+                  }`}
                 type="outlined"
                 onClick={() => this.setState({ activePage: "register" })}
               >
@@ -191,7 +214,7 @@ class AuthScreen extends React.Component {
               <ButtonUI
                 className={`ml-3 auth-screen-btn ${
                   this.state.activePage == "login" ? "active" : null
-                }`}
+                  }`}
                 type="outlined"
                 onClick={() => this.setState({ activePage: "login" })}
               >
@@ -221,6 +244,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   onRegister: registerHandler,
   onLogin: loginHandler,
+  totalCart
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthScreen);

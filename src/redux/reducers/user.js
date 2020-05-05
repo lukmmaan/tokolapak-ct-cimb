@@ -10,7 +10,6 @@ const init_state = {
   role: "",
   errMsg: "",
   cookieChecked: false,
-  search: ""
 };
 
 export default (state = init_state, action) => {
@@ -33,8 +32,6 @@ export default (state = init_state, action) => {
       return { ...init_state, cookieChecked: true };
     case "COOKIE_CHECK":
       return { ...state, cookieChecked: true };
-    case "ON_CHANGE":
-      return { ...state, cookieChecked: true, search: action.payload }
     default:
       return { ...state };
   }

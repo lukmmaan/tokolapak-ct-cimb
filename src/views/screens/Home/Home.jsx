@@ -141,7 +141,7 @@ class Home extends React.Component {
   renderProducts = () => {
     return this.state.bestSellerData.map((val) => {
       const {productName}= val
-      if (productName.toLowerCase().startsWith(this.props.user.search.toLowerCase()))
+      if (productName.toLowerCase().includes(this.props.cari.searchValue.toLowerCase()))
       return (
         <ProductCard key={`bestseller-${val.id}`} data={val} className="m-2" />
       );
@@ -216,7 +216,7 @@ class Home extends React.Component {
         </Carousel>
         <div className="container">
           {/* BEST SELLER SECTION */}
-          <h2 className="text-center font-weight-bolder mt-5">BEST SELLER,{this.props.user.search}</h2>
+          <h2 className="text-center font-weight-bolder mt-5">BEST SELLER,{this.props.cari.searchValue}</h2>
           <div className="row d-flex flex-wrap justify-content-center">
             {this.renderProducts()}
           </div>
@@ -277,6 +277,7 @@ class Home extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+    cari: state.search
   };
 };
 const mapDispatchtoProps = {

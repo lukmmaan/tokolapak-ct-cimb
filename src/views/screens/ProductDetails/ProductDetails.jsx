@@ -7,7 +7,7 @@ import ButtonUI from "../../components/Button/Button";
 import TextField from "../../components/TextField/TextField";
 import Axios from "axios";
 import { API_URL } from "../../../constants/API";
-
+import {totalCart} from "../../../redux/actions/search"
 class ProductDetails extends React.Component {
   state = {
     productData: {
@@ -19,6 +19,32 @@ class ProductDetails extends React.Component {
       id: 0,
     },
   };
+  addToWishListHandler =()=>{
+    Axios.get(`${API_URL}/wishlist`, {
+      params: {
+        userId: this.props.user.id,
+        productId: this.state.productData.id
+      }
+    })
+    .then((res)=>{
+      if (res.data.length==0) {
+        Axios.post(`${API_URL}/wishlist`, {
+          userId: this.props.user.id,
+          productId: this.state.productData.id,
+          quantity: 1,
+        })
+          .then((res) => {
+            console.log(res);
+            swal("", "Your item has been add to your wishList", "success")
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      }else {
+        swal("Ooops","Your item has been added in your wishlist","error")
+      }
+    })
+  }
   addToCartHandler = () => {
     // console.log(this.props.user.id);
     Axios.get(`${API_URL}/carts`, {
@@ -35,8 +61,23 @@ class ProductDetails extends React.Component {
             quantity: 1,
           })
             .then((res) => {
-              console.log(res);
+              // console.log(res);
               swal("", "Your item has been add to your cart", "success")
+              Axios.get(`${API_URL}/carts`, {
+                params: {
+                  userId: this.props.user.id,
+                  _expand: "product",
+                },
+              })
+              .then((res)=>{
+                // console.log(res.data.length)
+                
+                // console.log(qtyTotal)
+                this.props.totalCart(res.data.length)
+              })
+              .catch((err)=>{
+                console.log(err)
+              })
             })
             .catch((err) => {
               console.log(err);
@@ -48,6 +89,15 @@ class ProductDetails extends React.Component {
             .then((res) => {
               // console.log("barang sudah ada, dibeli lagi")
               swal("", `you buy for ${res.data.quantity} items`, "success")
+              Axios.get(`${API_URL}/carts`, {
+                params: {
+                  userId: this.props.user.id,
+                  _expand: "product",
+                },
+              })
+              .then((res)=>{
+                console.log(res.data)
+              })
             })
             .catch((err) => {
               console.log(err);
@@ -100,7 +150,7 @@ class ProductDetails extends React.Component {
             {/* <TextField type="number" placeholder="Quantity" className="mt-3" /> */}
             <div className="d-flex flex-row mt-4">
               <ButtonUI onClick={this.addToCartHandler}>Add To Cart</ButtonUI>
-              <ButtonUI className="ml-4" type="outlined">
+              <ButtonUI onClick={this.addToWishListHandler} className="ml-4" type="outlined">
                 Add To Wishlist
               </ButtonUI>
             </div>
@@ -117,4 +167,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(ProductDetails);
+export default connect(mapStateToProps,{totalCart})(ProductDetails);

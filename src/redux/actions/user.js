@@ -110,10 +110,3 @@ export const cookieChecker = () => {
     type: "COOKIE_CHECK",
   };
 };
-
-export const onchangeTodo =(text)=>{
-  return {
-      type: "ON_CHANGE",
-      payload: text,
-  };
-}
